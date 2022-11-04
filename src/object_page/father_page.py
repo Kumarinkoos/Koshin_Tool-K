@@ -44,6 +44,10 @@ class FatherPage:
         self.__powered_by = Label(self.__top_frame, text="Powered By Kumarinko", bg="white", fg="#A0AFB7")
         self.__powered_by.place(x=630, y=20)
 
+    def destroy_page(self):
+        self.__top_frame.destroy()
+        self.__seq.destroy()
+
 
 if __name__ == '__main__':
     root = Tk()
