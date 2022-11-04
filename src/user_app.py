@@ -35,8 +35,8 @@ class Application(Frame):
     @staticmethod
     def __create_widgets(master=None):
         menu = menu_page.MenuPage(master)
-        menu.creat_button_frame()
-        menu.creat_tips_frame()
+        menu.button_in_button_frame()
+        menu.tips_label_in_tips_frame()
 
 
 def root_init():
