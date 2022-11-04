@@ -5,6 +5,7 @@
 @ date: 2022-11-04
 """
 from tkinter import *
+from src.menu_page import menu_page
 
 
 class MainPage:
@@ -33,7 +34,9 @@ class Application(Frame):
 
     @staticmethod
     def __create_widgets(master=None):
-        pass
+        menu = menu_page.MenuPage(master)
+        menu.creat_button_frame()
+        menu.creat_tips_frame()
 
 
 def root_init():
