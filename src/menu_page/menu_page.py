@@ -8,6 +8,7 @@
 """
 from tkinter import *
 from src.object_page import father_page
+from src.help_page import help_page
 
 
 class MenuPage(father_page.FatherPage):
@@ -27,9 +28,8 @@ class MenuPage(father_page.FatherPage):
         super().__init__(master)
         self.master = master
         # 初始化框架
-        fp = father_page.FatherPage(self.master)
-        fp.create_label_frame("菜单")
-        fp.create_seq()
+        super().create_label_frame("菜单")
+        super().create_seq()
         self.__button_frame = Frame(self.master, bg="white", width=600, height=400)
         self.__tips_frame = LabelFrame(self.master, text="提示", labelanchor="n", font=("微软雅黑", 12),
                                        bg="white", width=190, height=380)
@@ -99,15 +99,16 @@ class MenuPage(father_page.FatherPage):
         pass
 
     def __change_help_page(self):
-        pass
+        self.__destroy_page()
+        help_p = help_page.HelpPage(self.master)
+        help_p.create_cut()
+        help_p.create_return_button()
 
     # 销毁页面
     def __destroy_page(self):
         super().destroy_page()
         self.__button_frame.destroy()
         self.__tips_frame.destroy()
-
-
 
 
 if __name__ == '__main__':
