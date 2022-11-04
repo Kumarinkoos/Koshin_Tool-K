@@ -4,3 +4,6 @@
 @ version: 1.0.0
 @ date: 2022-11-04
 """
+from src.user_app import *
+
+root_init()
