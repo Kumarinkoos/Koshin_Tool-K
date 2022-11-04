@@ -17,9 +17,8 @@ class FatherPage:
     # 初始化框架
     def __init__(self, master: Tk):
         self.master = master
-        self.__top_frame = Frame(self.master, bg="white", width=800, height=50)
+        self.__top_frame = Frame(self.master, bg="white", width=800, height=49)
         self.__seq = ttk.Separator(self.master, orient=HORIZONTAL)
-
 
     # 标签框架
     def create_label_frame(self, title: str):
@@ -30,8 +29,9 @@ class FatherPage:
         self.__create_title_label(title)
         self.__create_powered_label()
 
-    # 分割线放置
+    # 分割线
     def create_seq(self):
+        # 分割线放置
         self.__seq.pack(pady=50, fill="x")
 
     # 标题标签
@@ -43,6 +43,7 @@ class FatherPage:
     def __create_powered_label(self):
         self.__powered_by = Label(self.__top_frame, text="Powered By Kumarinko", bg="white", fg="#A0AFB7")
         self.__powered_by.place(x=630, y=20)
+
 
 if __name__ == '__main__':
     root = Tk()
