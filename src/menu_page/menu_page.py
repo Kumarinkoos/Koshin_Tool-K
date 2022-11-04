@@ -13,6 +13,7 @@ from src.help_page import help_page
 
 class MenuPage(father_page.FatherPage):
     # 类的属性
+    title = "菜单"
     # 按钮文字
     __find_button_txt = "找寻文件模板".center(6)
     __report_button_txt = "试验报告书".center(6)
@@ -28,22 +29,22 @@ class MenuPage(father_page.FatherPage):
         super().__init__(master)
         self.master = master
         # 初始化框架
-        super().create_label_frame("菜单")
+        super().create_top_frame(self.title)
         super().create_seq()
         self.__button_frame = Frame(self.master, bg="white", width=600, height=400)
         self.__tips_frame = LabelFrame(self.master, text="提示", labelanchor="n", font=("微软雅黑", 12),
                                        bg="white", width=190, height=380)
         # 初始化按钮
-        self.find_button = Button(self.__button_frame, text=self.__find_button_txt, width=10, height=2,
-                                  font=("微软雅黑", 18), bg="#89CFF0", command=self.__change_find_page)
-        self.report_button = Button(self.__button_frame, text=self.__report_button_txt, width=10, height=2,
-                                    font=("微软雅黑", 18), bg="#89CFF0", command=self.__change_report_page)
-        self.help_button = Button(self.__button_frame, text=self.__help_button_txt, width=10, height=2,
-                                  font=("微软雅黑", 18), bg="#89CFF0", command=self.__change_help_page)
+        self.__find_button = Button(self.__button_frame, text=self.__find_button_txt, width=10, height=2,
+                                    font=("微软雅黑", 18), bg="#89CFF0", command=self.__change_find_page)
+        self.__report_button = Button(self.__button_frame, text=self.__report_button_txt, width=10, height=2,
+                                      font=("微软雅黑", 18), bg="#89CFF0", command=self.__change_report_page)
+        self.__help_button = Button(self.__button_frame, text=self.__help_button_txt, width=10, height=2,
+                                    font=("微软雅黑", 18), bg="#89CFF0", command=self.__change_help_page)
         # 初始化提示文本
-        self.__label_find = Label(self.__tips_frame, text=self.__find_text, bg="white")
-        self.__label_report = Label(self.__tips_frame, text=self.__report_text, bg="white")
-        self.__label_help = Label(self.__tips_frame, text=self.__help_text, bg="white")
+        self.__find_label = Label(self.__tips_frame, text=self.__find_text, bg="white")
+        self.__report_label = Label(self.__tips_frame, text=self.__report_text, bg="white")
+        self.__help_label = Label(self.__tips_frame, text=self.__help_text, bg="white")
 
     # 按钮框架
     def creat_button_frame(self):
@@ -51,45 +52,45 @@ class MenuPage(father_page.FatherPage):
         self.__button_frame.place(x=0, y=51)
         # 按钮放置
         # 找寻文件模板按钮
-        self.find_button.grid(row=0, column=0, padx=20, pady=15)
-        self.find_button.bind("<Enter>", func=self.__find_mouse_in)
-        self.find_button.bind("<Leave>", func=self.__find_mouse_out)
+        self.__find_button.grid(row=0, column=0, padx=20, pady=15)
+        self.__find_button.bind("<Enter>", func=self.__find_mouse_in)
+        self.__find_button.bind("<Leave>", func=self.__find_mouse_out)
         # 试验报告书按钮
-        self.report_button.grid(row=0, column=1, padx=20, pady=15)
-        self.report_button.bind("<Enter>", func=self.__report_mouse_in)
-        self.report_button.bind("<Leave>", func=self.__report_mouse_out)
+        self.__report_button.grid(row=0, column=1, padx=20, pady=15)
+        self.__report_button.bind("<Enter>", func=self.__report_mouse_in)
+        self.__report_button.bind("<Leave>", func=self.__report_mouse_out)
         # 帮助文档按钮
-        self.help_button.grid(row=0, column=2, padx=20, pady=15)
-        self.help_button.bind("<Enter>", func=self.__help_mouse_in)
-        self.help_button.bind("<Leave>", func=self.__help_mouse_out)
+        self.__help_button.grid(row=0, column=2, padx=20, pady=15)
+        self.__help_button.bind("<Enter>", func=self.__help_mouse_in)
+        self.__help_button.bind("<Leave>", func=self.__help_mouse_out)
 
     # 提示框架
     def creat_tips_frame(self):
         # 提示框架放置
         self.__tips_frame.place(x=600, y=51)
         # 提示框内鼠标不在按钮上为隐藏
-        self.__label_find.place_forget()
-        self.__label_report.place_forget()
-        self.__label_help.place_forget()
+        self.__find_label.place_forget()
+        self.__report_label.place_forget()
+        self.__help_label.place_forget()
 
     # 鼠标进出事件
     def __find_mouse_in(self, event):
-        self.__label_find.place(x=0, y=0)
+        self.__find_label.place(x=0, y=0)
 
     def __find_mouse_out(self, event):
-        self.__label_find.place_forget()
+        self.__find_label.place_forget()
 
     def __report_mouse_in(self, event):
-        self.__label_report.place(x=0, y=0)
+        self.__report_label.place(x=0, y=0)
 
     def __report_mouse_out(self, event):
-        self.__label_report.place_forget()
+        self.__report_label.place_forget()
 
     def __help_mouse_in(self, event):
-        self.__label_help.place(x=0, y=0)
+        self.__help_label.place(x=0, y=0)
 
     def __help_mouse_out(self, event):
-        self.__label_help.place_forget()
+        self.__help_label.place_forget()
 
     # 鼠标点击换页
     def __change_find_page(self):
@@ -102,7 +103,7 @@ class MenuPage(father_page.FatherPage):
         self.__destroy_page()
         help_p = help_page.HelpPage(self.master)
         help_p.create_cut()
-        help_p.create_return_button()
+        help_p.create_under_frame()
 
     # 销毁页面
     def __destroy_page(self):

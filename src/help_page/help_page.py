@@ -14,6 +14,7 @@ from src.menu_page import menu_page
 
 class HelpPage(father_page.FatherPage):
     # 类的属性
+    title = "帮助文档"
     # 按钮文字
     __return_button_txt = "返回主菜单"
     # 选项卡标题
@@ -31,13 +32,13 @@ class HelpPage(father_page.FatherPage):
         super().__init__(master)
         self.master = master
         # 初始化框架
-        super().create_label_frame("帮助文档")
+        super().create_top_frame(self.title)
         super().create_seq()
         self.__cut = ttk.Notebook(self.master, width=800, height=300)
-        self.__return_frame = Frame(self.master, bg="white", width=800, height=100)
+        self.__under_frame = Frame(self.master, bg="white", width=800, height=100)
         # 初始化按钮
-        self.return_button = Button(self.__return_frame, text=self.__return_button_txt, width=10, height=2,
-                                    font=("微软雅黑", 12), bg="#89CFF0", command=self.__return_menu)
+        self.__return_button = Button(self.__under_frame, text=self.__return_button_txt, width=10, height=2,
+                                      font=("微软雅黑", 12), bg="#89CFF0", command=self.__return_menu)
 
     # 选项卡框架
     def create_cut(self):
@@ -48,12 +49,12 @@ class HelpPage(father_page.FatherPage):
         self.__create_report_notebook()
         self.__create_about_notebook()
 
-    # 按钮框架
-    def create_return_button(self):
-        # # 按钮框架放置
-        self.__return_frame.place(x=0, y=350)
-        # # 按钮放置
-        self.return_button.place(x=40, y=15)
+    # 返回按钮框架
+    def create_under_frame(self):
+        # 返回按钮框架放置
+        self.__under_frame.place(x=0, y=350)
+        # 返回按钮放置
+        self.__return_button.place(x=40, y=15)
 
     # 关于找寻文件模板
     def __create_find_notebook(self):
@@ -105,7 +106,7 @@ class HelpPage(father_page.FatherPage):
     def __destroy_page(self):
         super().destroy_page()
         self.__cut.destroy()
-        self.__return_frame.destroy()
+        self.__under_frame.destroy()
 
 
 if __name__ == '__main__':
@@ -125,5 +126,5 @@ if __name__ == '__main__':
     root.resizable(False, False)
     help_page = HelpPage(root)
     help_page.create_cut()
-    help_page.create_return_button()
+    help_page.create_under_frame()
     root.mainloop()

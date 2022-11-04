@@ -21,7 +21,7 @@ class FatherPage:
         self.__seq = ttk.Separator(self.master, orient=HORIZONTAL)
 
     # 标签框架
-    def create_label_frame(self, title: str):
+    def create_top_frame(self, title: str):
         # 放置标签框架
         self.__top_frame.place(x=0, y=0)
         # 标签框架里调用标题标签和Powered By标签
@@ -66,6 +66,6 @@ if __name__ == '__main__':
     root.resizable(False, False)
     father_page = FatherPage(root)
     father_page.title = "父类测试"
-    father_page.create_label_frame(father_page.title)
+    father_page.create_top_frame(father_page.title)
     father_page.create_seq()
     root.mainloop()
