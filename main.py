@@ -6,4 +6,5 @@
 """
 from src.user_app import *
 
+
 root_init()
