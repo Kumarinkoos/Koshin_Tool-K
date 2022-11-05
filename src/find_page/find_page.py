@@ -115,13 +115,14 @@ class FindPage(content_page.ContentPage):
             messagebox.showwarning("警告信息", "没有选择任何条目")
         else:
             message = copy_file_to_desktop.copy_file_to_desktop(get_entry_val)
-            if message == "未找到模板文件，请联系部长或开发者":
-                messagebox.showerror("错误信息", message)
+            if message == "已复制到桌面":
+                messagebox.showinfo("执行信息", message)
             elif message == "桌面已有同名文件，请检查文件以免被覆盖":
                 messagebox.showwarning("警告信息", message)
             else:
-                message = "已复制到桌面"
-                messagebox.showinfo("执行信息", message)
+                message = "未找到模板文件，请联系部长或开发者"
+                messagebox.showerror("错误信息", message)
+
 
     # 子类重写返回主菜单
     def __return_menu(self):

@@ -9,10 +9,10 @@
 import os
 
 
-def can_i_open(folder_path: str):
+def can_i_open(file_path: str):
     # 判断文件夹是否存在
-    if os.path.exists(folder_path):
-        os.system(f"explorer {folder_path}")
+    if os.path.exists(file_path):
+        os.system(f'explorer /select, {file_path}')
         message = "已打开"
         return message
     else:
@@ -22,8 +22,8 @@ def can_i_open(folder_path: str):
 
 def open_file_in_folder(file_name: str):
     if file_name == "设计变更提案书":
-        folder_path = "D:\\1-Work File\\Program\\Project-K\\K-file"
-        message = can_i_open(folder_path)
+        file_path = "D:\\1-Work File\\Program\\Project-K\\K-file\\設計変更提案書.xlsx"
+        message = can_i_open(file_path)
         return message
     elif file_name == "项目评价一览表":
         pass
