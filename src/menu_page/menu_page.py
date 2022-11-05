@@ -19,6 +19,7 @@ from tkinter import *
 from src.object_page import father_page
 from src.help_page import help_page
 from src.find_page import find_page
+from src.report_page import report_step1_page
 
 
 class MenuPage(father_page.FatherPage):
@@ -109,7 +110,10 @@ class MenuPage(father_page.FatherPage):
         find_p.jump_button_in_under_frame()
 
     def __change_report_page(self):
-        pass
+        self.__destroy_page()
+        report_step1_p = report_step1_page.ReportStep1(self.master)
+        report_step1_p.func_in_content_frame()
+        report_step1_p.jump_button_in_under_frame()
 
     def __change_help_page(self):
         self.__destroy_page()

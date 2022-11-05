@@ -27,9 +27,9 @@
 @ version: 1.0.0
 @ date: 2022-11-04
 """
+# 这里不能使用导入from src.menu_page import menu_page的引用语句，会出现循环引用的报错、
 from tkinter import *
 from src.object_page import father_page
-from src.menu_page import menu_page
 
 
 class ContentPage(father_page.FatherPage):
@@ -64,13 +64,13 @@ class ContentPage(father_page.FatherPage):
         self.__content_tips_label.place(x=0, y=0)
         # 初始化跳转按钮
         self.return_button = Button(self.under_frame, text=self.__return_button_txt, width=10, height=2,
-                                      font=("微软雅黑", 12), bg="#89CFF0", command=self.__return_menu)
+                                    font=("微软雅黑", 12), bg="#89CFF0", command=self.__return_menu)
         self.next_button = Button(self.under_frame, text=self.__next_button_txt, width=10, height=2,
-                                    font=("微软雅黑", 12), bg="#89CFF0", command=self.__next_page)
+                                  font=("微软雅黑", 12), bg="#89CFF0", command=self.__next_page)
         self.back_button = Button(self.under_frame, text=self.__back_button_txt, width=10, height=2,
                                   font=("微软雅黑", 12), bg="#89CFF0", command=self.__back_page)
         self.finish_button = Button(self.under_frame, text=self.__finish_button_txt, width=10, height=2,
-                                  font=("微软雅黑", 12), bg="#89CFF0", command=self.__finish_page)
+                                    font=("微软雅黑", 12), bg="#89CFF0", command=self.__finish_page)
 
     # 内容框架用于子类重写
     def func_in_content_frame(self):
@@ -80,12 +80,9 @@ class ContentPage(father_page.FatherPage):
     def jump_button_in_under_frame(self):
         pass
 
-    # 返回主菜单按钮不需要重写，所有的操作都指向menu
+    # 返回主菜单按钮用于子类重写避免循环引用
     def __return_menu(self):
-        self.destroy_content_page()
-        menu_p = menu_page.MenuPage(self.master)
-        menu_p.button_in_button_frame()
-        menu_p.tips_label_in_tips_frame()
+        pass
 
     # 下一步按钮用于子类重写
     def __next_page(self):
