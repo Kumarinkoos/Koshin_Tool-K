@@ -4,19 +4,27 @@
 不要使用start，使用start的话，如果文件夹路径中有特殊符号就会打不开。
 @ author: Kumarinko
 @ version: 1.0.0
-@ date: 2022-11-04
+@ date: 2022-11-05
 """
 import os
+
+
+def can_i_open(folder_path: str):
+    # 判断文件夹是否存在
+    if os.path.exists(folder_path):
+        os.system(f"explorer {folder_path}")
+        message = "已打开"
+        return message
+    else:
+        message = "未找到模板文件的目录，请联系部长或开发者"
+        return message
 
 
 def open_file_in_folder(file_name: str):
     if file_name == "设计变更提案书":
         folder_path = "D:\\1-Work File\\Program\\Project-K\\K-file"
-        if os.path.exists(folder_path):
-            os.system(f"explorer {folder_path}")
-            return False
-        else:
-            return True
+        message = can_i_open(folder_path)
+        return message
     elif file_name == "项目评价一览表":
         pass
     elif file_name == "试验报告书-利天承认":
