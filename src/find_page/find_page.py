@@ -17,6 +17,7 @@ from tkinter import messagebox
 from src.object_page import content_page
 from src.menu_page import menu_page
 from src.func import open_file_in_folder
+from src.func import copy_file_to_desktop
 # 测试用
 import test
 
@@ -94,30 +95,33 @@ class FindPage(content_page.ContentPage):
             get_listbox_val = self.find_listbox.get(self.find_listbox.curselection())
             # 设置标签的值
             self.check_var.set(get_listbox_val)
-        except Exception as error:
-            error = "错误信息"
-            messagebox.showwarning(error, "没有选择任何条目")
+        except Exception as warning:
+            messagebox.showwarning("警告信息", "没有选择任何条目")
 
     # 打开文件所在文件夹按钮的功能
     def func_open_button(self):
         get_entry_val = self.check_entry.get()
         if get_entry_val == "":
-            error = "错误信息"
-            messagebox.showwarning(error, "没有选择任何条目")
+            messagebox.showwarning("警告信息", "没有选择任何条目")
         else:
-            result = open_file_in_folder.open_file_in_folder(get_entry_val)
-            if result:
-                error = "错误信息"
-                messagebox.showwarning(error, "未找到模板文件，请联系部长")
+            message = open_file_in_folder.open_file_in_folder(get_entry_val)
+            if message == "未找到模板文件的目录，请联系部长或开发者":
+                messagebox.showerror("错误信息", message)
 
     # 打开复制到桌面的按钮
     def func_copy_button(self):
         get_entry_val = self.check_entry.get()
         if get_entry_val == "":
-            error = "错误信息"
-            messagebox.showwarning(error, "没有选择任何条目")
+            messagebox.showwarning("警告信息", "没有选择任何条目")
         else:
-            pass
+            message = copy_file_to_desktop.copy_file_to_desktop(get_entry_val)
+            if message == "未找到模板文件，请联系部长或开发者":
+                messagebox.showerror("错误信息", message)
+            elif message == "桌面已有同名文件，请检查文件以免被覆盖":
+                messagebox.showwarning("警告信息", message)
+            else:
+                message = "已复制到桌面"
+                messagebox.showinfo("执行信息", message)
 
     # 子类重写返回主菜单
     def __return_menu(self):
