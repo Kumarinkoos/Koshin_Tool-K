@@ -20,6 +20,8 @@ from src.object_page import father_page
 from src.help_page import help_page
 from src.find_page import find_page
 from src.report_page import report_step1_page
+# 测试用
+import test
 
 
 class MenuPage(father_page.FatherPage):
@@ -130,19 +132,7 @@ class MenuPage(father_page.FatherPage):
 
 if __name__ == '__main__':
     root = Tk()
-    root.title("菜单页测试")
-    # 设置窗口大小
-    width = 800
-    height = 450
-    scree_center_width = int((root.winfo_screenwidth() - width) / 2)
-    scree_center_height = int((root.winfo_screenheight() - height) / 2)
-    root.geometry(f"{width}x{height}+{scree_center_width}+{scree_center_height}")
-
-    # 设置背景为颜色
-    root.config(background="white")
-
-    # 窗口不可放大
-    root.resizable(False, False)
+    test.root_test(root, "菜单页测试")
     menu_page = MenuPage(root)
     menu_page.button_in_button_frame()
     menu_page.tips_label_in_tips_frame()

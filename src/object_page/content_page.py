@@ -30,6 +30,8 @@
 # 这里不能使用导入from src.menu_page import menu_page的引用语句，会出现循环引用的报错、
 from tkinter import *
 from src.object_page import father_page
+# 测试用
+import test
 
 
 class ContentPage(father_page.FatherPage):
@@ -106,19 +108,7 @@ class ContentPage(father_page.FatherPage):
 
 if __name__ == '__main__':
     root = Tk()
-    root.title("内容页测试")
-    # 设置窗口大小
-    width = 800
-    height = 450
-    scree_center_width = int((root.winfo_screenwidth() - width) / 2)
-    scree_center_height = int((root.winfo_screenheight() - height) / 2)
-    root.geometry(f"{width}x{height}+{scree_center_width}+{scree_center_height}")
-
-    # 设置背景为颜色
-    root.config(background="white")
-
-    # 窗口不可放大
-    root.resizable(False, False)
+    test.root_test(root, "内容页测试")
     content_page = ContentPage(root)
     content_page.func_in_content_frame()
     content_page.jump_button_in_under_frame()

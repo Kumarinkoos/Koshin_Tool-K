@@ -17,6 +17,8 @@ from tkinter import *
 import tkinter.ttk as ttk
 from src.object_page import father_page
 from src.menu_page import menu_page
+# 测试用
+import test
 
 
 class HelpPage(father_page.FatherPage):
@@ -118,19 +120,7 @@ class HelpPage(father_page.FatherPage):
 
 if __name__ == '__main__':
     root = Tk()
-    root.title("帮助文档测试")
-    # 设置窗口大小
-    width = 800
-    height = 450
-    scree_center_width = int((root.winfo_screenwidth() - width) / 2)
-    scree_center_height = int((root.winfo_screenheight() - height) / 2)
-    root.geometry(f"{width}x{height}+{scree_center_width}+{scree_center_height}")
-
-    # 设置背景为颜色
-    root.config(background="white")
-
-    # 窗口不可放大
-    root.resizable(False, False)
+    test.root_test(root, "帮助文档测试页")
     help_page = HelpPage(root)
     help_page.notebook_in_cut()
     help_page.return_button_in_under_frame()

@@ -11,6 +11,9 @@
 from tkinter import *
 from src.object_page import content_page
 from src.menu_page import menu_page
+from src.report_page import report_step2_page
+# 测试用
+import test
 
 
 class ReportStep1(content_page.ContentPage):
@@ -47,24 +50,15 @@ class ReportStep1(content_page.ContentPage):
 
     # 子类重写下一步
     def __next_page(self):
-        pass
+        self.destroy_content_page()
+        report_step2_p = report_step2_page.ReportStep2(self.master)
+        report_step2_p.func_in_content_frame()
+        report_step2_p.jump_button_in_under_frame()
 
 
 if __name__ == '__main__':
     root = Tk()
-    root.title("找寻文件模板页测试")
-    # 设置窗口大小
-    width = 800
-    height = 450
-    scree_center_width = int((root.winfo_screenwidth() - width) / 2)
-    scree_center_height = int((root.winfo_screenheight() - height) / 2)
-    root.geometry(f"{width}x{height}+{scree_center_width}+{scree_center_height}")
-
-    # 设置背景为颜色
-    root.config(background="white")
-
-    # 窗口不可放大
-    root.resizable(False, False)
+    test.root_test(root, "试验报告书步骤1测试页")
     report_step1_page = ReportStep1(root)
     report_step1_page.func_in_content_frame()
     report_step1_page.jump_button_in_under_frame()
