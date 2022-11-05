@@ -16,6 +16,7 @@ from tkinter import *
 from tkinter import messagebox
 from src.object_page import content_page
 from src.menu_page import menu_page
+from src.func import open_file_in_folder
 # 测试用
 import test
 
@@ -54,7 +55,7 @@ class FindPage(content_page.ContentPage):
         self.check_label = Label(self.content_frame, text=self.check_label_txt, font=("微软雅黑", 12), bg="white", fg="red")
         # 初始化显示被选择的文件的文本，这个文本需要有个变量来接收选中的listbox的内容
         self.check_var = StringVar()
-        self.check_entry = Entry(self.content_frame, bg="#B0B0B0",fg="black", font=("微软雅黑", 14), width=25,
+        self.check_entry = Entry(self.content_frame, bg="#B0B0B0", font=("微软雅黑", 14), width=25,
                                  textvariable=self.check_var)
         # 初始化按钮
         self.check_button = Button(self.content_frame, text=self.check_button_txt, width=12, height=2,
@@ -77,9 +78,9 @@ class FindPage(content_page.ContentPage):
         self.check_label.place(x=300, y=15)
         self.check_entry.place(x=300, y=50)
         self.check_entry.config(state=DISABLED)
-        self.check_button.place(x=350, y=100)
-        self.open_button.place(x=350, y=170)
-        self.copy_button.place(x=350, y=240)
+        self.check_button.place(x=370, y=100)
+        self.open_button.place(x=370, y=170)
+        self.copy_button.place(x=370, y=240)
 
     # 对跳转框架的方法重写
     def jump_button_in_under_frame(self):
@@ -91,7 +92,7 @@ class FindPage(content_page.ContentPage):
     def func_check_button(self):
         try:
             get_listbox_val = self.find_listbox.get(self.find_listbox.curselection())
-            # 设置label值
+            # 设置标签的值
             self.check_var.set(get_listbox_val)
         except Exception as error:
             error = "错误信息"
@@ -99,11 +100,24 @@ class FindPage(content_page.ContentPage):
 
     # 打开文件所在文件夹按钮的功能
     def func_open_button(self):
-        pass
+        get_entry_val = self.check_entry.get()
+        if get_entry_val == "":
+            error = "错误信息"
+            messagebox.showwarning(error, "没有选择任何条目")
+        else:
+            result = open_file_in_folder.open_file_in_folder(get_entry_val)
+            if result:
+                error = "错误信息"
+                messagebox.showwarning(error, "未找到模板文件，请联系部长")
 
     # 打开复制到桌面的按钮
     def func_copy_button(self):
-        pass
+        get_entry_val = self.check_entry.get()
+        if get_entry_val == "":
+            error = "错误信息"
+            messagebox.showwarning(error, "没有选择任何条目")
+        else:
+            pass
 
     # 子类重写返回主菜单
     def __return_menu(self):
