@@ -16,6 +16,8 @@ from src.menu_page import menu_page
 from src.report_page import report_step2_page
 from src.func import select_file
 from src.func import open_file
+from src.func import creat_buff_folder
+from src.func import upload_to_buff_folder
 # 测试用
 import test
 
@@ -109,7 +111,18 @@ class ReportStep1(content_page.ContentPage):
 
     # 上传文件按钮
     def func_upload_button(self):
-        pass
+        if self.file_path.get() == "":
+            messagebox.showwarning("警告信息", "没有选择任何文件")
+        elif self.file_path.get().endswith(".xlsx"):
+            answer = messagebox.askokcancel("信息", "选择的文件为Excel,可能没有承认，是否继续上传？")
+            if answer:
+                messagebox.showinfo("信息", "将另存为PDF进行上传")
+                creat_buff_folder.create_buff_folder()
+        elif self.file_path.get().endswith(".pdf"):
+            creat_buff_folder.create_buff_folder()
+            upload_to_buff_folder.upload_to_buff_folder(self.file_path.get())
+        else:
+            messagebox.showwarning("警告信息", "文件不为PDF")
 
     # 子类重写返回主菜单
     def __return_menu(self):

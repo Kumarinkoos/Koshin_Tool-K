@@ -17,7 +17,7 @@ from tkinter import *
 from tkinter import messagebox
 from src.object_page import content_page
 from src.menu_page import menu_page
-from src.func import open_file_in_folder
+from src.func import open_file
 from src.func import copy_file_to_desktop
 # 测试用
 import test
@@ -105,7 +105,7 @@ class FindPage(content_page.ContentPage):
         if get_entry_val == "":
             messagebox.showwarning("警告信息", "没有选择任何条目")
         else:
-            message = open_file_in_folder.open_file_in_folder(get_entry_val)
+            message = open_file.find_open_file_in_folder(get_entry_val)
             if message == "未找到模板文件的目录，请联系部长或开发者":
                 messagebox.showerror("错误信息", message)
 
