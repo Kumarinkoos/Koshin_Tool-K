@@ -1,27 +1,27 @@
 """
-试验报告书步骤2界面，用于添加扫描项目评价一览表
+试验报告书步骤3界面，用于添加扫描设计变更提案书
 继承于content page
 框架主要包括顶部标签用框架、内容框架、提示框架、返回框架
 重写了内容框架里的功能（func_in_content_frame）
 重写了跳转框架里的功能（jump_button_in_under_frame），添加了返回按钮和下一步按钮
 @ author: Kumarinko
 @ version: 1.0.0
-@ date: 2022-11-05
+@ date: 2022-11-07
 """
 from tkinter import *
 from tkinter import messagebox
 from src.object_page import content_page
 from src.menu_page import menu_page
-from src.report_page import report_step1_page
-from src.report_page import report_step3_page
+from src.report_page import report_step2_page
+from src.report_page import report_step4_page
 # 测试用
 import test
 
 
-class ReportStep2(content_page.ContentPage):
+class ReportStep3(content_page.ContentPage):
     # 类的属性
-    title = "试验报告书步骤2"
-    tips_txt = "试验报告书步骤2"
+    title = "试验报告书步骤3"
+    tips_txt = "试验报告书步骤3"
     __return_button_txt = "返回主菜单"
     __back_button_txt = "上一步"
     __next_button_txt = "下一步"
@@ -58,22 +58,22 @@ class ReportStep2(content_page.ContentPage):
     # 子类重写下一步
     def __next_page(self):
         self.destroy_content_page()
-        report_step3_p = report_step3_page.ReportStep3(self.master)
-        report_step3_p.func_in_content_frame()
-        report_step3_p.jump_button_in_under_frame()
+        report_step4_p = report_step4_page.ReportStep4(self.master)
+        report_step4_p.func_in_content_frame()
+        report_step4_p.jump_button_in_under_frame()
 
     # 子类重写上一步，暂时使用destroy页面，可能需要改成隐藏页面
     def __back_page(self):
         self.destroy_content_page()
-        report_step1_p = report_step1_page.ReportStep1(self.master)
-        report_step1_p.func_in_content_frame()
-        report_step1_p.jump_button_in_under_frame()
+        report_step2_p = report_step2_page.ReportStep2(self.master)
+        report_step2_p.func_in_content_frame()
+        report_step2_p.jump_button_in_under_frame()
 
 
 if __name__ == '__main__':
     root = Tk()
-    test.root_test(root, "试验报告书步骤2测试页")
-    report_step2_page = ReportStep2(root)
-    report_step2_page.func_in_content_frame()
-    report_step2_page.jump_button_in_under_frame()
+    test.root_test(root, "试验报告书步骤3测试页")
+    report_step3_page = ReportStep3(root)
+    report_step3_page.func_in_content_frame()
+    report_step3_page.jump_button_in_under_frame()
     root.mainloop()

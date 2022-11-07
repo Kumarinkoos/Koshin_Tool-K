@@ -9,6 +9,7 @@
 @ date: 2022-11-05
 """
 from tkinter import *
+import windnd
 from src.object_page import content_page
 from src.menu_page import menu_page
 from src.report_page import report_step2_page
@@ -26,7 +27,7 @@ class ReportStep1(content_page.ContentPage):
     upload_label_txt = "请选择要上传的表纸："
     select_label_txt = "被选择的文件为："
     select_button_txt = "选择文件"
-    check_button_txt = "确认文件"
+    check_button_txt = "打开确认文件"
     upload_button_txt = "上传文件"
 
     # 类的方法
@@ -48,7 +49,7 @@ class ReportStep1(content_page.ContentPage):
         # 初始化被选择的文件显示标签
         self.step1_select_label = Label(self.content_frame, text=self.select_label_txt, font=("微软雅黑", 12), bg="white")
         self.select_file = StringVar()
-        self.step1_select_entry = Entry(self.content_frame, bg="white", font=("微软雅黑", 14), width=25,
+        self.step1_select_entry = Entry(self.content_frame, bg="white", font=("微软雅黑", 12), width=25,
                                         textvariable=self.select_file)
         # 初始化按钮
         self.step1_select_button = Button(self.content_frame, text=self.select_button_txt, width=12, height=2,
@@ -57,6 +58,18 @@ class ReportStep1(content_page.ContentPage):
                                          font=("微软雅黑", 12), bg="#89CFF0", command=self.func_check_button)
         self.step1_upload_button = Button(self.content_frame, text=self.upload_button_txt, width=12, height=2,
                                           font=("微软雅黑", 12), bg="#89CFF0", command=self.func_upload_button)
+
+    # 拖入文档功能
+    def windnd_available(self):
+        windnd.hook_dropfiles(self.master, func=self.dragged_file)
+
+    def dragged_file(self, file):
+        dragged_file_path = '\n'.join(item.decode('gbk') for item in file)
+        self.file_path.set("")
+        self.file_path.set(dragged_file_path)
+        path_list = dragged_file_path.split("\\")
+        self.select_file.set("")
+        self.select_file.set(path_list[-1])
 
     # 子类重写内容框架里面写功能
     def func_in_content_frame(self):
@@ -112,4 +125,5 @@ if __name__ == '__main__':
     report_step1_page = ReportStep1(root)
     report_step1_page.func_in_content_frame()
     report_step1_page.jump_button_in_under_frame()
+    report_step1_page.windnd_available()
     root.mainloop()

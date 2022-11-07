@@ -116,6 +116,7 @@ class MenuPage(father_page.FatherPage):
         report_step1_p = report_step1_page.ReportStep1(self.master)
         report_step1_p.func_in_content_frame()
         report_step1_p.jump_button_in_under_frame()
+        report_step1_p.windnd_available()
 
     def __change_help_page(self):
         self.__destroy_page()

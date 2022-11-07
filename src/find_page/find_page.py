@@ -6,8 +6,9 @@
 重写了跳转框架里的功能（jump_button_in_under_frame），添加了返回按钮
 功能要求：
     用Listbox设置可选择的文件列表
-    按钮1为打开所选文件所在文件夹
-    按钮2为将所选文件复制到桌面
+    按钮1为确定选择该文件，当按下后输入控件显示被选择的文件
+    按钮2为打开所选文件所在文件夹，并指出了文件
+    按钮3为将所选文件复制到桌面
 @ author: Kumarinko
 @ version: 1.0.0
 @ date: 2022-11-04
@@ -122,7 +123,6 @@ class FindPage(content_page.ContentPage):
             else:
                 message = "未找到模板文件，请联系部长或开发者"
                 messagebox.showerror("错误信息", message)
-
 
     # 子类重写返回主菜单
     def __return_menu(self):
