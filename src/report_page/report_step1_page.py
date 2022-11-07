@@ -10,10 +10,12 @@
 """
 from tkinter import *
 import windnd
+from tkinter import messagebox
 from src.object_page import content_page
 from src.menu_page import menu_page
 from src.report_page import report_step2_page
 from src.func import select_file
+from src.func import open_file
 # 测试用
 import test
 
@@ -27,7 +29,7 @@ class ReportStep1(content_page.ContentPage):
     upload_label_txt = "请选择要上传的表纸："
     select_label_txt = "被选择的文件为："
     select_button_txt = "选择文件"
-    check_button_txt = "打开确认文件"
+    check_button_txt = "打开文件确认"
     upload_button_txt = "上传文件"
 
     # 类的方法
@@ -59,9 +61,9 @@ class ReportStep1(content_page.ContentPage):
         self.step1_upload_button = Button(self.content_frame, text=self.upload_button_txt, width=12, height=2,
                                           font=("微软雅黑", 12), bg="#89CFF0", command=self.func_upload_button)
 
-    # 拖入文档功能
+    # 拖入文档功能，这里不能传入master，会出现指针错误，因为master在destroy里无法销毁
     def windnd_available(self):
-        windnd.hook_dropfiles(self.master, func=self.dragged_file)
+        windnd.hook_dropfiles(self.content_frame, func=self.dragged_file)
 
     def dragged_file(self, file):
         dragged_file_path = '\n'.join(item.decode('gbk') for item in file)
@@ -75,8 +77,10 @@ class ReportStep1(content_page.ContentPage):
     def func_in_content_frame(self):
         self.step1_upload_label.place(x=20, y=20)
         self.step1_path_entry.place(x=20, y=50)
+        self.step1_path_entry.config(state=DISABLED)
         self.step1_select_label.place(x=20, y=100)
         self.step1_select_entry.place(x=150, y=100)
+        self.step1_select_entry.config(state=DISABLED)
         self.step1_select_button.place(x=440, y=90)
         self.step1_check_button.place(x=40, y=150)
         self.step1_upload_button.place(x=440, y=150)
@@ -92,13 +96,16 @@ class ReportStep1(content_page.ContentPage):
         selected_file_path = select_file.select_file()
         self.file_path.set("")
         self.file_path.set(selected_file_path)
-        path_list = selected_file_path.split("/")
+        path_list = selected_file_path.split("\\")
         self.select_file.set("")
         self.select_file.set(path_list[-1])
 
     # 确认文件按钮
     def func_check_button(self):
-        pass
+        if self.file_path.get() == "":
+            messagebox.showwarning("警告信息", "没有选择任何文件")
+        else:
+            open_file.open_file(self.file_path.get())
 
     # 上传文件按钮
     def func_upload_button(self):

@@ -1,5 +1,5 @@
 """
-将选定的文件复制到桌面
+将选定的文件复制到桌面的功能的实现
 
 *在文件被占用的时候，复制会出现问题，
 提示PermissionError: [Errno 13] Permission denied
